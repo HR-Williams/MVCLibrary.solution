@@ -4,3 +4,4 @@ bin
 obj
 EnvironmentVariables.cs
 appsettings.json
+appsettings.Development.json
