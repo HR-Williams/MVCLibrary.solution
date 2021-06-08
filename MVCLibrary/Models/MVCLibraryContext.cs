@@ -8,6 +8,8 @@ namespace MVCLibrary.Models
     public DbSet<Book> Books { get; set; }
     public DbSet<AuthorBook> AuthorBook { get; set; }
 
+    public DbSet<Copy> Copy { get; set; }
+
     public MVCLibraryContext(DbContextOptions options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
