@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MVCLibrary.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace MVCLibrary
 {
@@ -27,20 +28,25 @@ namespace MVCLibrary
       services.AddEntityFrameworkMySql()
         .AddDbContext<MVCLibraryContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
+
+      services.AddIdentity<LibrarianUser, IdentityRole>()
+                .AddEntityFrameworkStores<MVCLibraryContext>()
+                .AddDefaultTokenProviders();
     }
 
     public void Configure(IApplicationBuilder app)
     {
       app.UseDeveloperExceptionPage();
+      app.UseAuthentication(); 
       app.UseRouting();
-
+      app.UseAuthorization();
       app.UseEndpoints(routes =>
       {
         routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
       });
 
       app.UseStaticFiles();
-      
+
       app.Run(async (context) =>
       {
         await context.Response.WriteAsync("Hello World!");
