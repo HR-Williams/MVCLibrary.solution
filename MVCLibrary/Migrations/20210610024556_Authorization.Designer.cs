@@ -3,14 +3,16 @@ using System;
 using MVCLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVCLibrary.Migrations
 {
     [DbContext(typeof(MVCLibraryContext))]
-    partial class MVCLibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20210610024556_Authorization")]
+    partial class Authorization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
