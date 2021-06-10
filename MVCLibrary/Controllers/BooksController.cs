@@ -24,10 +24,15 @@ namespace MVCLibrary.Controllers
     }
     public async Task<ActionResult> Index()
     {
-        var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var currentUser = await _userManager.FindByIdAsync(userId);
-        var userBooks = _db.Books.Where(entry => entry.User.Id == currentUser.Id).ToList();
+        // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        // var currentUser = await _userManager.FindByIdAsync(userId);
+        var userBooks = _db.Books.ToList();
         return View(userBooks);
+    }
+    public ActionResult Create()
+    {
+      ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "LastName");
+      return View();
     }
     [HttpPost]
     public async Task<ActionResult> Create(Book book, int AuthorId)

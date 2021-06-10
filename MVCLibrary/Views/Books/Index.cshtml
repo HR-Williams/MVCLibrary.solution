@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@using MVCLibrary.Models;
+@model List<MVCLibrary.Models.Book>;
+
+
+<h1>All the books in our Library</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No books in the library</h3>
+}
+
+ @foreach (Book book in Model)
+{
+  <li>@Html.ActionLink($"{book.Title}", "Details", new { id = book.BookId })</li>
+
+}
+
+
+<p>@Html.ActionLink("Add a new book", "Create")</p>
