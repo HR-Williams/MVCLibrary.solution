@@ -22,8 +22,8 @@ namespace MVCLibrary.Controllers
       _userManager = userManager;
       _db = db;
     }
-    public async Task<ActionResult> Index()
-    {
+    public ActionResult Index() //if this method incluces an async Task and await the  method should look like: public async Task<ActionResult> Index()
+    {     
         // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         // var currentUser = await _userManager.FindByIdAsync(userId);
         var userBooks = _db.Books.ToList();
@@ -76,6 +76,21 @@ namespace MVCLibrary.Controllers
         .ThenInclude(join => join.Book)
         .FirstOrDefault(book => book.BookId == id);
       return View(thisBook);
+    }
+
+    public ActionResult Delete(int id)
+    {
+      var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      return View(thisBook);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      _db.Books.Remove(thisBook);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
