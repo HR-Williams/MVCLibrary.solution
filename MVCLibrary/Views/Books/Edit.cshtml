@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@model MVCLibrary.Models.Book
+
+<h2>Edit this book's title</h2>
+
+<h4>@Html.DisplayFor(model => model.Title)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.BookId)
+
+  @Html.LabelFor(model => model.Title)
+
+  @Html.EditorFor(model => model.Title)
+
+  @Html.Label("Select author")
+  @Html.DropDownList("AuthorId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
