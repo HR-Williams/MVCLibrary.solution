@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using System;
 
 namespace MVCLibrary.Controllers
 {
@@ -87,8 +88,18 @@ namespace MVCLibrary.Controllers
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
+    Console.WriteLine(id);
       var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
       _db.Books.Remove(thisBook);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DeleteAuthor(int joinId)
+    {
+      var joinEntry = _db.AuthorBook.FirstOrDefault(entry => entry.AuthorBookId == joinId);
+      _db.AuthorBook.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
