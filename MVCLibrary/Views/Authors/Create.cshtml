@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model MVCLibrary.Models.Author
+
+<h4>Add a new author</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.LastName)
+  @Html.TextBoxFor(model => model.LastName)
+  @Html.LabelFor(model => model.FirstName)
+  @Html.TextBoxFor(model => model.FirstName)
+
+  @Html.Label("Select book")
+  @Html.DropDownList("BookId")
+
+  <input type="submit" value="Add new item" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Show all books", "Index")</p>

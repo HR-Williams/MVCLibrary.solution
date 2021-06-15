@@ -9,6 +9,7 @@
 @Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
 @using (Html.BeginForm())
 {
+  @Html.HiddenFor(model => model.BookId)
   <input type="submit" value="Delete" />
 }
 @Html.ActionLink("Back to List", "Index")
