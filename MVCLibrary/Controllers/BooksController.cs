@@ -32,7 +32,7 @@ namespace MVCLibrary.Controllers
     }
     public ActionResult Create()
     {
-      ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "LastName");
+      ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "LastName", "AuthorId", "FirstName");
       return View();
     }
     [HttpPost]
