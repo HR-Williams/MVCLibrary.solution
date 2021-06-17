@@ -29,6 +29,7 @@ namespace MVCLibrary.Controllers
     }
     public ActionResult Create()
     {
+      //remove this viewbag and selectlist on view if we want to be able to create an author without a book from drop down. then create AddBook get and post methods and views
       ViewBag.BookId = new SelectList(_db.Books, "BookId", "Title");
       return View();
     }
