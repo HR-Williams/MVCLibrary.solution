@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model MVCLibrary.Models.Author
+
+<h2>Author Details:</h2>
+<hr />
+<h3>@Html.DisplayFor(model => model.LastName),  @Html.DisplayFor(model => model.FirstName)</h3> 
+
+ @if (@Model.JoinEntities.Count == 0)
+{
+  <p>This Author has no books registered! Add one below.</p>
+}
+else
+{
+  <h4>This author has the following books:</h4>
+  <ul>
+  @foreach (var join in Model.JoinEntities)
+    {
+      <li>@join.Book.Title</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p> 
+@*<p>@Html.ActionLink("Edit", "Edit", new { id = Model.BookId })</p>
+<p>@Html.ActionLink("Delete book", "Delete", new { id = Model.BookId})</p>*@

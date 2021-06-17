@@ -103,5 +103,25 @@ namespace MVCLibrary.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult AddAuthor(int id)
+{
+    var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+    ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "LastName", "AuthorId", "FirstName");
+    return View(thisBook);
+}
+
+[HttpPost]
+public ActionResult AddAuthor(Book book, int AuthorId)
+{
+    if (AuthorId != 0)
+    {
+    _db.AuthorBook.Add(new AuthorBook() { AuthorId = AuthorId, BookId = book.BookId });
+    }
+    _db.SaveChanges();
+    return RedirectToAction("Index");
+}
   }
+
+  
 }
